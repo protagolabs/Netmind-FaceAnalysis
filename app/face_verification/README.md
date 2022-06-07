@@ -1,6 +1,6 @@
 we develop our inference app in this directory
 
-# Option
+# Optional
 
 1 create a new python environment by conda
 conda create --name fv python=3.8
