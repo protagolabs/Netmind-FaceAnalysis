@@ -1,6 +1,10 @@
 we develop our inference app in this directory
 
 # 1. prepare face detector model 
+*1 download the weights from the link
+
+
+
 
 # 2. prepare face recognition model
 
