@@ -28,6 +28,7 @@ we develop our inference app in this directory
 
 
      Please also judge whether the value of input_mean and input_std in faceverfication_implement.py is right for their own face recognition models. Generally, when the model have preprocessing steps in itself, it do not need any other operations (input_mean = 0.0 and input_std = 1.0). Otherwise, it may be input_mean = 127.5 and input_std = 127.5. Participants must adjust the script accordingly.
+    
     If necessary, please compare the feature obtained by this repo with the one obtained from training model by using one image, e.g. demo/0.png, to make sure the feature are almost the same. Otherwise, there may be other issues.
 
 
