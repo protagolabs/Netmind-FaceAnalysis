@@ -15,7 +15,8 @@ from torchvision import datasets, transforms
 
 from timm.data import create_transform
 from timm.data.constants import IMAGENET_DEFAULT_MEAN, IMAGENET_DEFAULT_STD
-
+from celeba import CelebA
+from lfw import LFW
 
 def build_dataset(is_train, args):
     transform = build_transform(is_train, args)
@@ -27,7 +28,53 @@ def build_dataset(is_train, args):
 
     return dataset
 
+def build_celeba_dataset(is_train, args):
+    transform = build_transform(is_train, args)
 
+    # root = os.path.join(args.data_path, 'train' if is_train else 'val')
+    # dataset = datasets.ImageFolder(root, transform=transform)
+
+    # print(dataset)
+    if is_train:
+        dataset = CelebA(
+                    args.data_path,
+                    'train_attr_list.txt',
+                    transform=transform
+                )
+    else:
+        dataset = CelebA(
+                    args.data_path,
+                    'test_attr_list.txt',
+                    transform=transform
+                )
+
+    return dataset
+
+
+def build_lfw_dataset(is_train, args):
+    transform = build_transform(is_train, args)
+
+    # root = os.path.join(args.data_path, 'train' if is_train else 'val')
+    # dataset = datasets.ImageFolder(root, transform=transform)
+
+    # print(dataset)
+    if is_train:
+        dataset = LFW(
+                    args.data_path,
+                    'lfw_att_40.mat',
+                    'train',
+                    transform=transform
+        )
+    else:
+        dataset = LFW(
+                    args.data_path,
+                    'lfw_att_40.mat',
+                    'test',
+                    transform=transform
+        )
+
+    return dataset
+    
 def build_transform(is_train, args):
     mean = IMAGENET_DEFAULT_MEAN
     std = IMAGENET_DEFAULT_STD
