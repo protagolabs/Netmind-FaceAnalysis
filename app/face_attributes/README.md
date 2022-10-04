@@ -3,7 +3,7 @@ we develop our inference app in this directory
 # Prepare Environment (Optional)
 
 1 create a new python environment by conda
-conda create --name fv python=3.8
+conda create --name fa python=3.8
 
 2 install the devs
 pip install -r requirements.txt
@@ -42,14 +42,5 @@ pip install -r requirements.txt
     If necessary, please compare the feature obtained by this repo with the one obtained from training model by using one image, e.g. demo/0.png, to make sure the feature are almost the same. Otherwise, there may be other issues.
 
 
-# Results:
-
-Dataset | Backbone | IJBC (AUC) | IJBC (1E-4) | IJBC (1E-5) | MFR-all | link
---- | --- | --- | --- |--- | --- | ---
-MS1MV3 | mobilefacenet | 99.55 | 94.27 | 91.49 | - | [download](https://drive.google.com/file/d/1Kd2fUdrpAUUERTi4jFasUPk8I8caa7QW/view?usp=sharing)
-MS1MV2 | IResnet50 | - | -| - | - | [download](https://drive.google.com/file/d/1P7FZU16MOthOQ2cMXg1DZwXrYn0Js2wJ/view?usp=sharing)
-MS1MV3 | IResnet100 | 99.64 | 97.56 | 96.12 | 94.12 | [download](https://drive.google.com/file/d/136rmns71yjuhZ9i-tTHDs81rbR71Wagj/view?usp=sharing)
-WF42M-PFC-0.2 | IResnet100 | 99.67 | 97.60 | 96.03 | 95.66 | [download](https://drive.google.com/file/d/1-_YIsfC9U2QSdEd67_4SqGe9DU7tjC97/view?usp=sharing)
-
-# Ackowledgement
+# 3. Ackowledgement
 we adopt the implementing code from [WebFace260M Track of ICCV21-MFR](https://github.com/WebFace260M/webface260m-iccv21-mfr)
