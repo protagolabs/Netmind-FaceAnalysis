@@ -371,7 +371,7 @@ class PyWebFace260M:
         # tc = datetime.datetime.now()
         # print('cost face reg:', (tb - ta).total_seconds())
         # face_reg_cost = tc - tb
-        return feat
+        return feat, aimg
 
     def get_sim(self, feat1, feat2):
         return np.dot(feat1, feat2)
