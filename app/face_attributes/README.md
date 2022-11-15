@@ -15,11 +15,11 @@ pip install -r requirements.txt
 
 2 put the weight file "R50-retinaface.onnx" into the "./asset/det/" (you may need to create the folder) 
 
-# Prepare face recognition model
+# Prepare attribute estimation model
 
-1 download the [MS1V2-protagolabsweights](https://drive.google.com/file/d/1P7FZU16MOthOQ2cMXg1DZwXrYn0Js2wJ/view?usp=sharing)
+1 download the [face_attributes_40](https://drive.google.com/file/d/1D0WXKWSwT8P--hGrq8HBwHtoBt-QGQOg/view?usp=sharing)
 
-2 put the weight file "R50_MS1MV2_PW.onnx" into the "./asset/face_reg/" (you may need to create the folder) 
+2 put the weight file "face_attributes_40.onnx" into the "./asset/face_reg/" (you may need to create the folder) 
 
 # Important Notes
 

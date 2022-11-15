@@ -59,7 +59,7 @@ class PyWebFace260M:
         max_time_cost = 1000
 
 
-        self.model_file = os.path.join(rdir, 'face_reg', "R50_MS1MV2_PW.onnx")
+        self.model_file = os.path.join(rdir, 'face_reg', "face_attributes_40.onnx")
         print('use onnx-model:', self.model_file)
 
 
@@ -99,15 +99,18 @@ class PyWebFace260M:
             print('new-input-shape:', input_shape)
 
         self.image_size = tuple(input_shape[2:4][::-1])
-        # print('image_size:', self.image_size)
+        print('image_size:', self.image_size)
         input_name = input_cfg.name
         outputs = session.get_outputs()
+
+        # print(len(outputs))
         output_names = []
         for o in outputs:
             output_names.append(o.name)
-            # print(o.name, o.shape)
-        if len(output_names) != 1:
-            return "number of output nodes should be 1"
+            # print(o.name)
+        if len(output_names) != 40:
+            # return "number of output nodes should be 1" 
+            print("number of output nodes should be 40")       
         self.session = session
         self.input_name = input_name
         self.output_names = output_names
@@ -120,11 +123,13 @@ class PyWebFace260M:
         input_size = (112, 112)
         self.crop = None
         if input_size != self.image_size:
-            return "input-size is inconsistant with onnx model input, %s vs %s" % (input_size, self.image_size)
+            # return "input-size  %s is inconsistant with onnx model input %s" % (input_size, self.image_size)
+            print("input-size  %s is inconsistant with onnx model input %s" % (input_size, self.image_size))
 
-
+        # input_mean = [0.485, 0.456, 0.406]
+        # input_std = [0.229, 0.224, 0.225]
         input_mean = None
-        input_std = None
+        input_std = None     
         if input_mean is not None or input_std is not None:
             if input_mean is None or input_std is None:
                 return "please set input_mean and input_std simultaneously"
@@ -164,7 +169,8 @@ class PyWebFace260M:
             test_img = cv2.resize(test_img, self.image_size)
             
         feat, cost, det_cost, face_reg_cost = self.benchmark(test_img)
-
+        
+        # print(len(feat))
         self.feat_dim = feat.shape[0]
         cost_ms = int(cost * 1000)
         det_cost_ms = int(det_cost * 1000)
@@ -177,6 +183,7 @@ class PyWebFace260M:
         if cost_ms > max_time_cost:
             print ("max time cost exceed, given %.4f" % cost_ms)
         self.cost_ms = cost_ms
+
         print('check stat:, feat-dim: %d, time-cost-ms: %.4f, input-mean: %.3f, input-std: %.3f' % (self.feat_dim, self.cost_ms, self.input_mean, self.input_std))
         return cost_ms, det_cost_ms, face_reg_cost_ms
 
@@ -300,6 +307,7 @@ class PyWebFace260M:
                                       (self.input_mean, self.input_mean, self.input_mean), swapRB=True)
         net_out = self.session.run(self.output_names, {self.input_name: blob})[0]
 
+        print(len(net_out))
         feat = np.mean(net_out, axis=0)
         feat /= l2norm(feat)
 
@@ -363,15 +371,17 @@ class PyWebFace260M:
         if not isinstance(aimg, list):
             aimg = [aimg]
         blob = cv2.dnn.blobFromImages(aimg, 1.0/self.input_std, input_size, (self.input_mean, self.input_mean, self.input_mean), swapRB=True)
-        net_out = self.session.run(self.output_names, {self.input_name : blob})[0]
-
-        feat = np.mean(net_out, axis=0)
-        feat /= l2norm(feat)
+        net_out = self.session.run(self.output_names, {self.input_name : blob})
+        # print(net_out)
+        attr = net_out
+        # feat = np.mean(net_out, axis=0)
+        # feat /= l2norm(feat)
 
         # tc = datetime.datetime.now()
         # print('cost face reg:', (tb - ta).total_seconds())
         # face_reg_cost = tc - tb
-        return feat, aimg
+        return attr, aimg
+
 
     def get_sim(self, feat1, feat2):
         return np.dot(feat1, feat2)
