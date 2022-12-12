@@ -1,0 +1,11 @@
+opencv-python
+
+scikit-image
+
+protobuf==3.20.0
+
+onnx==1.12.0
+
+onnxruntime==1.12.1
+
+sklearn
