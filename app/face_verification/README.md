@@ -3,11 +3,15 @@ we develop our inference app in this directory
 # Prepare Environment (Optional)
 
 1 create a new python environment by conda
-conda create --name fv python=3.8
+```
+conda create --name face python=3.8
+```
 
 2 install the devs
+```
+conda activate face
 pip install -r requirements.txt
-
+```
 
 
 # Prepare face detector model 
