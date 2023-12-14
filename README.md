@@ -1,6 +1,7 @@
 # Netmind-FaceAnalysis
 
 ## Updates
+ * 12/14/2023 we add the tool for comparing similarity between two face images in app/face_visualize
  * 11/15/2022 Model updated: face_attributes_40 is fine-tuned from pretrain on [CelebA](https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html)
  * 10/04/2022 We provide the face attributes estimation 
  * 08/29/2022 Model updated: MobileFacenet on MS1MV3 and IResent100 trained on MS1MV3 and WebFace42M.
