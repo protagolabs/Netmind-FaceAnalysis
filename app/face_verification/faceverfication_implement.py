@@ -105,7 +105,7 @@ class PyWebFace260M:
         output_names = []
         for o in outputs:
             output_names.append(o.name)
-            # print(o.name, o.shape)
+            print(o.name, o.shape)
         if len(output_names) != 1:
             return "number of output nodes should be 1"
         self.session = session
